@@ -75,9 +75,11 @@ const Table: FC<Props> = ({currentPage, postLimit, sortType, inputValue, setItem
       {!isLoading && (
         <table className={styles.table}>
           <thead>
-          {TableColumns.map((item, index) => (
-            <th key={index} scope="col" onClick={() => sortTable(item.sortValue)}>{item.title}</th>
-          ))}
+          <tr>
+            {TableColumns.map((item, index) => (
+              <th key={index} scope="col" onClick={() => sortTable(item.sortValue)}>{item.title}</th>
+            ))}
+          </tr>
           </thead>
           <tbody>
           {data && data.data.map((item, index) => (
