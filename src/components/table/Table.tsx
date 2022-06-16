@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useQuery } from "react-query";
-import { getData } from "../../uttils/fetchApi";
+import { getCars } from "../../uttils/fetchApi";
 import styles from "./table.module.scss"
 import { DataArrayType } from '../../types/dataArrayType';
 import { CarType } from "../../types/carType";
@@ -13,7 +13,6 @@ interface Props {
   inputValue: string | number
   setItemsQuantity: (value: number) => void
   selectedField: string
-  searchValueType: string
 }
 
 const TableColumns = [
@@ -35,15 +34,14 @@ const TableColumns = [
   },
 ]
 
-const Table: FC<Props> = ({currentPage, postLimit, sortType, inputValue, setItemsQuantity, selectedField, searchValueType}) => {
-  let {data, isLoading} = useQuery<DataArrayType>(["data", {
+const Table: FC<Props> = ({currentPage, postLimit, sortType, inputValue, setItemsQuantity, selectedField}) => {
+  let {data, isLoading} = useQuery<DataArrayType>(["getCars", {
     page: currentPage,
     sortType: sortType,
     limit: postLimit,
     searchValue: inputValue,
     field: selectedField,
-    searchValueType: searchValueType
-  }], getData)
+  }], getCars)
   const [sortOrder, setSortOrder] = useState("asc")
   const [currentSortColumn, setCurrentSortColumn] = useState("")
 

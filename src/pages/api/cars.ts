@@ -6,12 +6,7 @@ import { CarsArray } from "../../mocks/carsArray";
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   let cars = CarsArray
   let selectedFieldIndex = req.query.field as keyof CarType
-  let searchValue: string | number = req.query.searchValue as string
-
-  // * Если в поиск ввели число, то конвертируем строку в number
-  if ((req.query.searchValueType === "number") && (req.query.sortType !== SortDefaultValues.contains)) {
-    searchValue = Number(searchValue)
-  }
+  let searchValue: string = req.query.searchValue as string
 
   // * Проверка на равенство двух строк
   if (req.query.field && (req.query.sortType === SortDefaultValues.equals)) {

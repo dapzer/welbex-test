@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { dehydrate, QueryClient } from "react-query";
-import { getData } from "../uttils/fetchApi";
+import { getCars } from "../uttils/fetchApi";
 import HomePageContainer from "../containers/HomePageContainer";
 
 const Home: NextPage = () => {
@@ -22,11 +22,11 @@ const Home: NextPage = () => {
 export async function getServerSideProps(ctx: any) {
   const { page } = ctx.query
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery(["getAllNews", {
+  await queryClient.prefetchQuery(["getCars", {
       page: page ? page : 1,
-      limit: 4,
+      limit: 10,
     }],
-    getData
+    getCars
   )
 
   return {
